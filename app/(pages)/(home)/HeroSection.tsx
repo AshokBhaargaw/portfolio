@@ -16,6 +16,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   const router = useRouter();
+  const [resumeDownloading, setResumeDownloading] = useState(false)
   const defaultResumeUrl = "/Ashok_Bhaargaw_Resume.pdf";
   const [resumeUrl, setResumeUrl] = useState(defaultResumeUrl);
 
@@ -29,8 +30,8 @@ export default function HeroSection() {
   // Add this function above the return
   const handleDownload = async () => {
     if (!resumeUrl) return;
-
     try {
+      setResumeDownloading(true)
       const response = await fetch(resumeUrl);
       if (!response.ok) {
         throw new Error(`Failed to fetch PDF: ${response.status}`);
@@ -52,6 +53,8 @@ export default function HeroSection() {
       console.error("Download failed:", err);
       // Fallback: just open the PDF (user can save manually)
       window.open(resumeUrl, "_blank");
+    } finally {
+      setResumeDownloading(false)
     }
   };
 
@@ -136,7 +139,7 @@ export default function HeroSection() {
                 disabled={!resumeUrl}
               >
                 <FileText size={18} />
-                <span>Resume</span>
+                <span>{resumeDownloading ? "Downloading..." : "Resume"}</span>
               </Button>
             </div>
 
