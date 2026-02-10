@@ -2,10 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Briefcase, Share2, User, MessageSquare } from "lucide-react";
+import {
+  LayoutDashboard,
+  FolderKanban,
+  Briefcase,
+  Share2,
+  User,
+  MessageSquare,
+  FileSliders,
+} from "lucide-react";
 import { BiLeftArrow } from "react-icons/bi";
 
-/* -------------------------------------------------- ICON REGISTRY (KEY PART – DO NOT CHANGE) -------------------------------------------------- */
+/* --------------- ICON REGISTRY (KEY PART – DO NOT CHANGE) --------------- */
 
 // In your OptionBar file (Sidebar + MobileTabBar)
 const ICONS = {
@@ -13,12 +21,12 @@ const ICONS = {
   FolderKanban: FolderKanban,
   Briefcase: Briefcase,
   Share2: Share2,
-  User: User, 
+  User: User,
   MessageSquare: MessageSquare,
+  FileSliders: FileSliders,
 } as const;
 
-
-/* -------------------------------------------------- TYPES -------------------------------------------------- */
+/* --------------- TYPES --------------- */
 
 export type NavItem = {
   href: string;
@@ -30,11 +38,10 @@ type Props = {
   navItems: NavItem[];
 };
 
-/* -------------------------------------------------- DESKTOP SIDEBAR -------------------------------------------------- */
+/* --------------- DESKTOP SIDEBAR --------------- */
 
 export function Sidebar({ navItems }: Props) {
   const pathname = usePathname();
-  
   return (
     <aside className="hidden md:flex fixed left-0 top-0 h-screen w-64 bg-slate-900/90 border-r border-slate-800">
       <div className="w-full px-6 py-4">
@@ -45,9 +52,7 @@ export function Sidebar({ navItems }: Props) {
           <BiLeftArrow /> Go Home
         </Link>
 
-        <h1 className="text-lg font-bold text-purple-400 mb-6">
-          Admin Panel
-        </h1>
+        <h1 className="text-lg font-bold text-purple-400 mb-6">Admin Panel</h1>
 
         <nav className="flex flex-col gap-2">
           {navItems.map((item) => {
@@ -59,9 +64,10 @@ export function Sidebar({ navItems }: Props) {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition
-                  ${active
-                    ? "bg-purple-600/20 text-purple-400"
-                    : "text-slate-400 hover:bg-purple-700/20 hover:text-white"
+                  ${
+                    active
+                      ? "bg-purple-600/20 text-purple-400"
+                      : "text-slate-400 hover:bg-purple-700/20 hover:text-white"
                   }`}
               >
                 <Icon className="w-5 h-5" />
@@ -75,10 +81,7 @@ export function Sidebar({ navItems }: Props) {
   );
 }
 
-/* --------------------------------------------------
-   MOBILE TAB BAR
--------------------------------------------------- */
-
+/* --------------- MOBILE TAB BAR --------------- */
 export function MobileTabBar({ navItems }: Props) {
   const pathname = usePathname();
 
@@ -94,9 +97,10 @@ export function MobileTabBar({ navItems }: Props) {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center justify-center gap-1 flex-1 transition
-                ${active
-                  ? "text-purple-400"
-                  : "text-slate-400 hover:text-purple-400"
+                ${
+                  active
+                    ? "text-purple-400"
+                    : "text-slate-400 hover:text-purple-400"
                 }`}
             >
               <Icon className="w-5 h-5" />

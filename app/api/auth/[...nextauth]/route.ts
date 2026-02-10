@@ -11,7 +11,6 @@ const handler = NextAuth({
 
   callbacks: {
     async signIn({ profile }) {
-      // 🔒 allow ONLY your GitHub email
       return profile?.email === "ashokbhaargaw@gmail.com";
     },
   },

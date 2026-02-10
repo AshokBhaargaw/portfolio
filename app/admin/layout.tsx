@@ -8,15 +8,14 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const navItems: NavItem[] = [
     { href: "/admin", label: "Overview", icon: "LayoutDashboard" },
     { href: "/admin/projects", label: "Projects", icon: "FolderKanban" },
     { href: "/admin/experience", label: "Experience", icon: "Briefcase" },
     { href: "/admin/profile", label: "Profile", icon: "User" },
     { href: "/admin/responses", label: "Responses", icon: "MessageSquare" },
+    { href: "/admin/resume", label: "Resume", icon: "FileSliders" },
   ];
-
 
   return (
     <div className="min-h-screen flex bg-[#0F172A] text-white">

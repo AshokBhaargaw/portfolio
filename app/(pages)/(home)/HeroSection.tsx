@@ -2,6 +2,7 @@
 
 import { Container, Button, Heading } from "@/Components/ui";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Github,
   Linkedin,
@@ -15,6 +16,44 @@ import Image from "next/image";
 
 export default function HeroSection() {
   const router = useRouter();
+  const defaultResumeUrl = "/Ashok_Bhaargaw_Resume.pdf";
+  const [resumeUrl, setResumeUrl] = useState(defaultResumeUrl);
+
+  useEffect(() => {
+    const active = localStorage.getItem("active_resume_url");
+    if (active) {
+      setResumeUrl(active);
+    }
+  }, []);
+
+  // Add this function above the return
+  const handleDownload = async () => {
+    if (!resumeUrl) return;
+
+    try {
+      const response = await fetch(resumeUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch PDF: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "Ashok_Bhaargaw_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error("Download failed:", err);
+      // Fallback: just open the PDF (user can save manually)
+      window.open(resumeUrl, "_blank");
+    }
+  };
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/AshokBhaargaw", label: "GitHub" },
@@ -72,8 +111,10 @@ export default function HeroSection() {
                 clean architecture
               </span>
               ,{" "}
-              <span className="text-foreground font-semibold">API design</span>,
-              and{" "}
+              <span className="text-foreground font-semibold">
+                API design
+              </span>
+              , and{" "}
               <span className="text-foreground font-semibold">
                 end-to-end development
               </span>
@@ -88,21 +129,15 @@ export default function HeroSection() {
                 Contact Me
               </Button>
 
-              <a
-                href="/Ashok_Bhaargaw_Resume.pdf"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
+              <Button
+                variant="secondary"
+                className="w-full sm:w-auto min-w-35 flex items-center justify-center gap-2"
+                onClick={handleDownload}
+                disabled={!resumeUrl}
               >
-                <Button
-                  variant="secondary"
-                  className="w-full sm:w-auto min-w-35 flex items-center justify-center gap-2"
-                >
-                  <FileText size={18} />
-                  <span>Resume</span>
-                </Button>
-              </a>
+                <FileText size={18} />
+                <span>Resume</span>
+              </Button>
             </div>
 
             {/* Social Links */}
@@ -167,22 +202,6 @@ export default function HeroSection() {
                   Ashok Bhaargaw
                 </h1>
                 <div className="flex gap-1 md:gap-2 mt-2 flex-wrap justify-center">
-                  {/* 
------------------- Colors for the future ------------------
-                  "text-indigo-400",
-                  "text-teal-400",
-                  "text-sky-400",
-                  "text-cyan-400",
-                  "text-emerald-400",
-                  "text-violet-400",
-                  "text-purple-400",
-                  "text-fuchsia-400",
-                  "text-rose-400",
-                  "text-amber-400",
-                  "text-lime-400",
-                  "text-blue-400", 
-                  */}
-
                   {[
                     ["MongoDB", "text-teal-400"],
                     ["Next.js", "text-red-400"],
