@@ -45,13 +45,10 @@ export default function HeroSection() {
       link.download = "Ashok_Bhaargaw_Resume.pdf";
       document.body.appendChild(link);
       link.click();
-
-      // Cleanup
       document.body.removeChild(link);
       URL.revokeObjectURL(blobUrl);
     } catch (err) {
       console.error("Download failed:", err);
-      // Fallback: just open the PDF (user can save manually)
       window.open(resumeUrl, "_blank");
     } finally {
       setResumeDownloading(false)
