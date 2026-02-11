@@ -39,10 +39,10 @@ export default function Project({
   const [showFullDesc, setShowFullDesc] = useState(false);
   return (
     <div
-      className={`flex flex-col items-center my-20 gap-12 md:gap-20 ${leftRight ? leftRight % 2 ? "md:flex-row-reverse": "md:flex-row" : "md:flex-row"}`}
+      className={`flex flex-col items-center my-20 gap-12 md:gap-20 ${leftRight ? (leftRight % 2 ? "lg:flex-row-reverse" : "lg:flex-row") : "lg:flex-row"}`}
     >
       {/* Left: Laptop Preview */}
-      <div className="w-full xl:w-3/5 flex justify-center">
+      <div className="w-full lg:max-w-1/2 flex justify-center">
         <div className="relative w-full max-w-200 group">
           <Image
             src="/laptop.png"
@@ -70,7 +70,7 @@ export default function Project({
       </div>
 
       {/* Right: Details */}
-      <div className="w-full xl:w-2/5 flex flex-col gap-6">
+      <div className="w-full lg:max-w-1/2 flex flex-col gap-6">
         <h3 className="text-3xl md:text-4xl font-bold">{project.title}</h3>
 
         <div className="flex">
@@ -149,7 +149,10 @@ export default function Project({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="secondary" className="px-4! md:px-auto! gap-1 md:gap-1">
+              <Button
+                variant="secondary"
+                className="px-4! md:px-auto! gap-1 md:gap-1"
+              >
                 <Github size={18} /> Source Code
               </Button>
             </a>
