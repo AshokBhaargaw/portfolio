@@ -39,7 +39,7 @@ export default function Project({
   const [showFullDesc, setShowFullDesc] = useState(false);
   return (
     <div
-      className={`flex flex-col items-center my-20 gap-12 xl:gap-20 ${leftRight ? leftRight % 2 ? "lg:flex-row-reverse": "lg:flex-row" : "lg:flex-row"}`}
+      className={`flex flex-col items-center my-20 gap-12 md:gap-20 ${leftRight ? leftRight % 2 ? "md:flex-row-reverse": "md:flex-row" : "md:flex-row"}`}
     >
       {/* Left: Laptop Preview */}
       <div className="w-full xl:w-3/5 flex justify-center">

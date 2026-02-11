@@ -2,13 +2,13 @@
 
 export default function ProjectSkeleton() {
   return (
-    <div className="flex flex-col items-center gap-12 xl:gap-20 lg:flex-row animate-pulse">
+    <div className="flex flex-col items-center gap-12 xl:gap-20 lg:flex-row justify-between animate-pulse">
       
       {/* Left: Laptop Skeleton */}
-      <div className="w-full xl:w-3/5 flex justify-center">
-        <div className="relative w-full max-w-[800px]">
+      <div className="w-full md:w-1/2 xl:w-3/5 flex justify-center">
+        <div className="relative w-full max-w-200">
           {/* Laptop frame */}
-          <div className="w-full aspect-[16/10] rounded-xl bg-gray-800 shadow-2xl" />
+          <div className="w-full aspect-16/10 rounded-xl bg-gray-800 shadow-2xl" />
 
           {/* Screen */}
           <div className="absolute top-[6%] left-[11%] w-[78%] h-[80%] rounded bg-gray-700" />
@@ -16,7 +16,7 @@ export default function ProjectSkeleton() {
       </div>
 
       {/* Right: Content Skeleton */}
-      <div className="w-full xl:w-2/5 flex flex-col gap-6">
+      <div className="w-full lg:w-2/5 md:w-1/2 flex flex-col gap-6">
         
         {/* Title */}
         <div className="h-10 w-3/4 rounded bg-gray-700" />
